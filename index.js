@@ -15,6 +15,10 @@ app.use(express.static('public'))
 const UserRoutes = require('./routes/UserRoutes')
 app.use('/users', UserRoutes)
 
+//rotas de Pets
+const PetRoutes = require('./routes/PetRoutes')
+app.use('/pets', PetRoutes)
+
 //routes rotas de acesso da api que vao vir dos arquivos de routes
 app.listen(5000)
 
