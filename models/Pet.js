@@ -1,41 +1,38 @@
 const mongoose = require('../db/conn')
-
 const { Schema } = mongoose
 
-
 const Pet = mongoose.model(
-    'Pet',
-    new Schema({
-        name: {
-            type: String,
-            required: true,
-        },
-        age: {
-            type: Number,
-            requires: true,
-        },
-        weight: {
-            type: Number,
-            requires: true,
-        },
-        color: {
-            type: String,
-            requires: true,
-        },
-        image: {
-            type: Array,
-            required: true,
-        },
-        available: {
-            type: Boolean
-        },
-        user: Object,
-        adopter: Object
+  'Pet',
+  new Schema({
+    name: {
+      type: String,
+      required: true,
     },
-        { timestamps: true },//cria duas colunas novas criatedAt e UpdatedAt (quando o dado foi criado a atualizado automaticamente)   
-
-
-    ),
+    age: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    weight: {
+      type: Number,
+      required: true,
+    },
+    color: {
+      type: String,
+      required: true,
+    },
+    images: {
+      type: Array,
+      required: true,
+    },
+    available: {
+      type: Boolean,
+    },
+    user: Object,
+    adopter: Object,
+  }, {timestamps: true}),
 )
 
-module.exports = Pet;
+module.exports = Pet

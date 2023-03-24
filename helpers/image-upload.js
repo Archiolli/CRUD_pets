@@ -1,32 +1,31 @@
 const multer = require("multer");
 const path = require("path");
 
-//destino das imagens
+// Destination to store image
 const imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     let folder = "";
 
-    if (req.baseUrl.includes("users")) {
+    console.log(req)
+
+    if (req.baseUrl.includes('users')) {
       folder = "users";
-    } else if (req.baseUrl.includes("pets")) {
+    } else if (req.baseUrl.includes('pets')) {
       folder = "pets";
     }
-
-    cb(null, `public/images/${folder}`);
+    cb(null, `public/images/${folder}/`);
   },
-  filename: function (req, res, cb) {
-    cb(null, Date.now() + String(Math.floor(Math.random() * 1000))  + path.extname(file.originalname));
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
 const imageUpload = multer({
   storage: imageStorage,
   fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(png|jpg$)$/)) {
-      //quando encontrar o ponto, se nao encontrar um png uo jpeg ene entra no if
-      return cb(
-        new ErrorEvent("Por Favor, envia apenas arquivos .PNG ou .JPG")
-      );
+    if (!file.originalname.match(/\.(png|jpg)$/)) {
+      // upload only png and jpg format
+      return cb(new Error("Por favor, envie apenas png ou jpg!"));
     }
     cb(undefined, true);
   },

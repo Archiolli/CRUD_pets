@@ -1,26 +1,23 @@
-const express = require('express') //framework
-const cors = require('cors') //ponto inicial no arquivo (midware)
 
-const app  = express()
-//config JSON response 
+const express = require('express')
+const cors = require('cors')
+
+const app = express()
+
+// Config JSON response
 app.use(express.json())
 
-//resolvendo o problema do cors  libera o cors pra acessar a API
-app.use(cors({ credentials: true, origin: 'http://localhost:3000'}))
+// Solve CORS
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 
-//public folder  pasta publica do prjeto
+// Public folder for images
 app.use(express.static('public'))
 
-//Rotas de usuarios
+// Routes
+const PetRoutes = require('./routes/PetRoutes')
 const UserRoutes = require('./routes/UserRoutes')
+
+app.use('/pets', PetRoutes)
 app.use('/users', UserRoutes)
 
-//rotas de Pets
-const PetRoutes = require('./routes/PetRoutes')
-app.use('/pets', PetRoutes)
-
-//routes rotas de acesso da api que vao vir dos arquivos de routes
 app.listen(5000)
-
-
-
