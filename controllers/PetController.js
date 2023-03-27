@@ -238,14 +238,14 @@ module.exports = class PetController {
       updateData.color = color
     }
 
-    if (!images) {
-      res.status(422).json({ message: 'A imagem é obrigatória!' })
-      return
-    } else {
+    if (images.length > 0) {
       updateData.images = []
       images.map((image) => {
         updateData.images.push(image.filename)
       })
+    } else {    
+      res.status(422).json({ message: 'A imagem é obrigatória!' })
+      return
     }
 
     if (!available) {
@@ -254,6 +254,7 @@ module.exports = class PetController {
     } else {
       updateData.available = available
     }
+    //res.status(401)
 
     updateData.description = description
 

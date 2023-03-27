@@ -78,6 +78,7 @@ module.exports = class UserController {
       res.status(500).json({ message: error })
     }
   }
+  //res.status(401)
 
   static async login(req, res) {
     const email = req.body.email
